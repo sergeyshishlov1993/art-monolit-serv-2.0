@@ -31,15 +31,6 @@ export declare class ProductsService {
             _count: {
                 images: number;
             };
-            specs: {
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                sortOrder: number;
-                key: string;
-                value: string;
-                productId: string;
-            }[];
             targetGroups: {
                 id: string;
                 name: string;
@@ -59,6 +50,15 @@ export declare class ProductsService {
                 productId: string;
                 s3Key: string;
                 alt: string | null;
+            }[];
+            specs: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                sortOrder: number;
+                productId: string;
+                key: string;
+                value: string;
             }[];
         } & {
             id: string;
@@ -110,15 +110,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -138,6 +129,15 @@ export declare class ProductsService {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -189,15 +189,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -217,6 +208,15 @@ export declare class ProductsService {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -251,27 +251,27 @@ export declare class ProductsService {
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     updateSpec(specId: string, dto: UpdateSpecDto): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     removeSpec(specId: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     findById(id: string): Promise<{
         category: {
@@ -279,15 +279,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -307,6 +298,15 @@ export declare class ProductsService {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;

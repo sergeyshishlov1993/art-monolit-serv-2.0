@@ -35,15 +35,6 @@ export declare class ProductsController {
             _count: {
                 images: number;
             };
-            specs: {
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                sortOrder: number;
-                key: string;
-                value: string;
-                productId: string;
-            }[];
             targetGroups: {
                 id: string;
                 name: string;
@@ -63,6 +54,15 @@ export declare class ProductsController {
                 productId: string;
                 s3Key: string;
                 alt: string | null;
+            }[];
+            specs: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                sortOrder: number;
+                productId: string;
+                key: string;
+                value: string;
             }[];
         } & {
             id: string;
@@ -119,27 +119,27 @@ export declare class ProductsController {
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     updateSpec(specId: string, dto: UpdateSpecDto): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     removeSpec(specId: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
-        productId: string;
     }>;
     update(id: string, dto: UpdateProductDto): Promise<{
         category: {
@@ -147,15 +147,6 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -175,6 +166,15 @@ export declare class ProductsController {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -210,15 +210,6 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -238,6 +229,15 @@ export declare class ProductsController {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -259,15 +259,6 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-            productId: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -287,6 +278,15 @@ export declare class ProductsController {
             productId: string;
             s3Key: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;

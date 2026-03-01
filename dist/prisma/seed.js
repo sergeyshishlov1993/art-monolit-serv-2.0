@@ -119,8 +119,6 @@ async function main() {
         update: {},
         create: {
             id: '00000000-0000-0000-0000-000000000001',
-            title: 'Мемориальный комплекс семьи Ивановых',
-            description: 'Полный комплекс: памятник, ограда, цветник',
             categoryId: category3.id,
             sortOrder: 1,
             targetGroups: { connect: [{ id: targetGroup2.id }] },
@@ -132,8 +130,6 @@ async function main() {
         update: {},
         create: {
             id: '00000000-0000-0000-0000-000000000002',
-            title: 'Установка памятника из чёрного гранита',
-            description: 'Одиночный памятник с гравировкой',
             categoryId: category1.id,
             sortOrder: 2,
             targetGroups: { connect: [{ id: targetGroup1.id }] },
@@ -146,7 +142,6 @@ async function main() {
             {
                 name: 'Иван Петров',
                 phone: '+79001234567',
-                email: 'ivan@test.ru',
                 message: 'Интересует памятник из гранита',
                 productId: product1.id,
                 status: 'NEW',
