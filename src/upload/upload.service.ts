@@ -1,15 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { PrismaService } from '../prisma/prisma.service';
 import { randomUUID } from 'crypto';
 import * as sharp from 'sharp';
+import * as path from 'path';
 
 @Injectable()
-export class UploadService {
+export class UploadService implements OnModuleInit {
     private s3: S3Client;
     private bucket: string;
     private cdnUrl: string;
+    private watermarkBuffer: Buffer;
 
     constructor(
         private config: ConfigService,
@@ -27,7 +29,23 @@ export class UploadService {
         });
     }
 
-    private async convertToWebp(buffer: Buffer, options?: { width?: number; height?: number; quality?: number }): Promise<Buffer> {
+    async onModuleInit() {
+        const watermarkPath = path.join(process.cwd(), 'assets', 'watermark.png');
+        this.watermarkBuffer = await sharp(watermarkPath)
+            .resize(300)
+            .png()
+            .toBuffer();
+    }
+
+    private async convertToWebp(
+        buffer: Buffer,
+        options?: {
+            width?: number;
+            height?: number;
+            quality?: number;
+            watermark?: boolean;
+        }
+    ): Promise<Buffer> {
         let sharpInstance = sharp(buffer);
 
         if (options?.width || options?.height) {
@@ -35,6 +53,14 @@ export class UploadService {
                 fit: 'inside',
                 withoutEnlargement: true,
             });
+        }
+
+        if (options?.watermark && this.watermarkBuffer) {
+            sharpInstance = sharpInstance.composite([{
+                input: this.watermarkBuffer,
+                gravity: 'southeast',
+                blend: 'over',
+            }]);
         }
 
         return sharpInstance
@@ -107,7 +133,7 @@ export class UploadService {
     }
 
     async uploadProductImage(productId: string, file: Express.Multer.File, isMain = false, alt?: string) {
-        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
         const s3Key = `products/${productId}/${randomUUID()}.webp`;
         const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
 
@@ -124,7 +150,7 @@ export class UploadService {
     }
 
     async uploadPortfolioImage(portfolioWorkId: string, file: Express.Multer.File, alt?: string) {
-        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
         const s3Key = `portfolio/${portfolioWorkId}/${randomUUID()}.webp`;
         const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
 
@@ -156,7 +182,7 @@ export class UploadService {
                 },
             });
 
-            const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+            const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
             const s3Key = `portfolio/${work.id}/${randomUUID()}.webp`;
             const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
 

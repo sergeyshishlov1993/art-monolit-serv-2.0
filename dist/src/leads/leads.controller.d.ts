@@ -16,11 +16,11 @@ export declare class LeadsController {
     } & {
         number: number;
         adminComment: string | null;
+        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        productId: string | null;
         phone: string;
         message: string | null;
         source: string;
@@ -39,11 +39,11 @@ export declare class LeadsController {
     } & {
         number: number;
         adminComment: string | null;
+        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        productId: string | null;
         phone: string;
         message: string | null;
         source: string;
@@ -62,11 +62,11 @@ export declare class LeadsController {
     } & {
         number: number;
         adminComment: string | null;
+        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        productId: string | null;
         phone: string;
         message: string | null;
         source: string;
@@ -85,11 +85,11 @@ export declare class LeadsController {
     } & {
         number: number;
         adminComment: string | null;
+        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        productId: string | null;
         phone: string;
         message: string | null;
         source: string;
@@ -99,11 +99,11 @@ export declare class LeadsController {
     remove(id: string): Promise<{
         number: number;
         adminComment: string | null;
+        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
-        productId: string | null;
         phone: string;
         message: string | null;
         source: string;

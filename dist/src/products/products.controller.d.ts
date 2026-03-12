@@ -35,6 +35,15 @@ export declare class ProductsController {
             _count: {
                 images: number;
             };
+            specs: {
+                productId: string;
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                sortOrder: number;
+                key: string;
+                value: string;
+            }[];
             targetGroups: {
                 id: string;
                 name: string;
@@ -47,22 +56,13 @@ export declare class ProductsController {
             }[];
             images: {
                 url: string;
+                productId: string;
                 id: string;
                 createdAt: Date;
                 sortOrder: number;
                 isMain: boolean;
-                productId: string;
                 s3Key: string;
                 alt: string | null;
-            }[];
-            specs: {
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                sortOrder: number;
-                productId: string;
-                key: string;
-                value: string;
             }[];
         } & {
             id: string;
@@ -115,29 +115,29 @@ export declare class ProductsController {
         seoDescription: string | null;
     }, never, import("@prisma/client/runtime/client").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
     addSpec(id: string, dto: CreateSpecDto): Promise<{
+        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
-        productId: string;
         key: string;
         value: string;
     }>;
     updateSpec(specId: string, dto: UpdateSpecDto): Promise<{
+        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
-        productId: string;
         key: string;
         value: string;
     }>;
     removeSpec(specId: string): Promise<{
+        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
-        productId: string;
         key: string;
         value: string;
     }>;
@@ -147,6 +147,15 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
+        specs: {
+            productId: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            key: string;
+            value: string;
+        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -159,22 +168,13 @@ export declare class ProductsController {
         }[];
         images: {
             url: string;
+            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
-            productId: string;
             s3Key: string;
             alt: string | null;
-        }[];
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            productId: string;
-            key: string;
-            value: string;
         }[];
     } & {
         id: string;
@@ -210,6 +210,15 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
+        specs: {
+            productId: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            key: string;
+            value: string;
+        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -222,22 +231,13 @@ export declare class ProductsController {
         }[];
         images: {
             url: string;
+            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
-            productId: string;
             s3Key: string;
             alt: string | null;
-        }[];
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            productId: string;
-            key: string;
-            value: string;
         }[];
     } & {
         id: string;
@@ -259,6 +259,15 @@ export declare class ProductsController {
             name: string;
             slug: string;
         };
+        specs: {
+            productId: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            key: string;
+            value: string;
+        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -271,22 +280,13 @@ export declare class ProductsController {
         }[];
         images: {
             url: string;
+            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
-            productId: string;
             s3Key: string;
             alt: string | null;
-        }[];
-        specs: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            productId: string;
-            key: string;
-            value: string;
         }[];
     } & {
         id: string;

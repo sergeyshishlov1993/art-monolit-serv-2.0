@@ -23,11 +23,11 @@ export declare class CategoriesController {
         products: ({
             images: {
                 url: string;
+                productId: string;
                 id: string;
                 createdAt: Date;
                 sortOrder: number;
                 isMain: boolean;
-                productId: string;
                 s3Key: string;
                 alt: string | null;
             }[];

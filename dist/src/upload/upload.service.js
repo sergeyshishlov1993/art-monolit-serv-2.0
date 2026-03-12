@@ -16,6 +16,7 @@ const client_s3_1 = require("@aws-sdk/client-s3");
 const prisma_service_1 = require("../prisma/prisma.service");
 const crypto_1 = require("crypto");
 const sharp = require("sharp");
+const path = require("path");
 let UploadService = class UploadService {
     constructor(config, prisma) {
         this.config = config;
@@ -30,6 +31,13 @@ let UploadService = class UploadService {
             },
         });
     }
+    async onModuleInit() {
+        const watermarkPath = path.join(process.cwd(), 'assets', 'watermark.png');
+        this.watermarkBuffer = await sharp(watermarkPath)
+            .resize(300)
+            .png()
+            .toBuffer();
+    }
     async convertToWebp(buffer, options) {
         let sharpInstance = sharp(buffer);
         if (options?.width || options?.height) {
@@ -37,6 +45,13 @@ let UploadService = class UploadService {
                 fit: 'inside',
                 withoutEnlargement: true,
             });
+        }
+        if (options?.watermark && this.watermarkBuffer) {
+            sharpInstance = sharpInstance.composite([{
+                    input: this.watermarkBuffer,
+                    gravity: 'southeast',
+                    blend: 'over',
+                }]);
         }
         return sharpInstance
             .webp({ quality: options?.quality || 85 })
@@ -97,7 +112,7 @@ let UploadService = class UploadService {
         });
     }
     async uploadProductImage(productId, file, isMain = false, alt) {
-        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
         const s3Key = `products/${productId}/${(0, crypto_1.randomUUID)()}.webp`;
         const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
         if (isMain) {
@@ -111,7 +126,7 @@ let UploadService = class UploadService {
         });
     }
     async uploadPortfolioImage(portfolioWorkId, file, alt) {
-        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+        const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
         const s3Key = `portfolio/${portfolioWorkId}/${(0, crypto_1.randomUUID)()}.webp`;
         const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
         return this.prisma.portfolioImage.create({
@@ -134,7 +149,7 @@ let UploadService = class UploadService {
                     }),
                 },
             });
-            const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85 });
+            const webpBuffer = await this.convertToWebp(file.buffer, { width: 1200, quality: 85, watermark: true });
             const s3Key = `portfolio/${work.id}/${(0, crypto_1.randomUUID)()}.webp`;
             const url = await this.uploadToS3(s3Key, webpBuffer, 'image/webp');
             await this.prisma.portfolioImage.create({
