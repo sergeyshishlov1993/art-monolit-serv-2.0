@@ -25,54 +25,54 @@ export declare class ProductsService {
         items: ({
             category: {
                 id: string;
-                name: string;
                 slug: string;
+                name: string;
             };
-            _count: {
-                images: number;
-            };
-            specs: {
+            targetGroups: {
+                id: string;
+                slug: string;
+                name: string;
+            }[];
+            materials: {
+                id: string;
+                slug: string;
+                name: string;
+            }[];
+            images: {
+                id: string;
+                createdAt: Date;
+                isMain: boolean;
+                sortOrder: number;
                 productId: string;
+                s3Key: string;
+                url: string;
+                alt: string | null;
+            }[];
+            specs: {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
                 sortOrder: number;
+                productId: string;
                 key: string;
                 value: string;
             }[];
-            targetGroups: {
-                id: string;
-                name: string;
-                slug: string;
-            }[];
-            materials: {
-                id: string;
-                name: string;
-                slug: string;
-            }[];
-            images: {
-                url: string;
-                productId: string;
-                id: string;
-                createdAt: Date;
-                sortOrder: number;
-                isMain: boolean;
-                s3Key: string;
-                alt: string | null;
-            }[];
+            _count: {
+                images: number;
+            };
         } & {
             id: string;
-            isActive: boolean;
-            createdAt: Date;
-            updatedAt: Date;
-            slug: string;
-            description: string | null;
             categoryId: string;
             title: string;
+            slug: string;
+            description: string | null;
             discountPercent: number | null;
             badges: import(".prisma/client").$Enums.ProductBadge[];
+            isActive: boolean;
             seoTitle: string | null;
             seoDescription: string | null;
+            createdAt: Date;
+            updatedAt: Date;
         })[];
         total: number;
         page: number;
@@ -107,219 +107,268 @@ export declare class ProductsService {
     findBySlug(slug: string): Promise<{
         category: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         };
-        specs: {
+        targetGroups: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        materials: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        images: {
+            id: string;
+            createdAt: Date;
+            isMain: boolean;
+            sortOrder: number;
             productId: string;
+            s3Key: string;
+            url: string;
+            alt: string | null;
+        }[];
+        specs: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             sortOrder: number;
+            productId: string;
             key: string;
             value: string;
         }[];
-        targetGroups: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        materials: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        images: {
-            url: string;
-            productId: string;
-            id: string;
-            createdAt: Date;
-            sortOrder: number;
-            isMain: boolean;
-            s3Key: string;
-            alt: string | null;
-        }[];
     } & {
         id: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        description: string | null;
         categoryId: string;
         title: string;
+        slug: string;
+        description: string | null;
         discountPercent: number | null;
         badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
         seoTitle: string | null;
         seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     create(dto: CreateProductDto): Prisma.Prisma__ProductClient<{
         category: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         };
         targetGroups: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         }[];
         materials: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         }[];
     } & {
         id: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        description: string | null;
         categoryId: string;
         title: string;
+        slug: string;
+        description: string | null;
         discountPercent: number | null;
         badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
         seoTitle: string | null;
         seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }, never, import("@prisma/client/runtime/client").DefaultArgs, Prisma.PrismaClientOptions>;
     update(id: string, dto: UpdateProductDto): Promise<{
         category: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         };
-        specs: {
+        targetGroups: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        materials: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        images: {
+            id: string;
+            createdAt: Date;
+            isMain: boolean;
+            sortOrder: number;
             productId: string;
+            s3Key: string;
+            url: string;
+            alt: string | null;
+        }[];
+        specs: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             sortOrder: number;
+            productId: string;
             key: string;
             value: string;
         }[];
-        targetGroups: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        materials: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        images: {
-            url: string;
-            productId: string;
-            id: string;
-            createdAt: Date;
-            sortOrder: number;
-            isMain: boolean;
-            s3Key: string;
-            alt: string | null;
-        }[];
     } & {
         id: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        description: string | null;
         categoryId: string;
         title: string;
+        slug: string;
+        description: string | null;
         discountPercent: number | null;
         badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
         seoTitle: string | null;
         seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
         id: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        description: string | null;
         categoryId: string;
         title: string;
+        slug: string;
+        description: string | null;
         discountPercent: number | null;
         badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
         seoTitle: string | null;
         seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    setMainImage(productId: string, imageId: string): Promise<{
+        category: {
+            id: string;
+            slug: string;
+            name: string;
+        };
+        targetGroups: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        materials: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        images: {
+            id: string;
+            createdAt: Date;
+            isMain: boolean;
+            sortOrder: number;
+            productId: string;
+            s3Key: string;
+            url: string;
+            alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
+        }[];
+    } & {
+        id: string;
+        categoryId: string;
+        title: string;
+        slug: string;
+        description: string | null;
+        discountPercent: number | null;
+        badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
+        seoTitle: string | null;
+        seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     addSpec(productId: string, dto: CreateSpecDto): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
     updateSpec(specId: string, dto: UpdateSpecDto): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
     removeSpec(specId: string): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
     findById(id: string): Promise<{
         category: {
             id: string;
-            name: string;
             slug: string;
+            name: string;
         };
-        specs: {
+        targetGroups: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        materials: {
+            id: string;
+            slug: string;
+            name: string;
+        }[];
+        images: {
+            id: string;
+            createdAt: Date;
+            isMain: boolean;
+            sortOrder: number;
             productId: string;
+            s3Key: string;
+            url: string;
+            alt: string | null;
+        }[];
+        specs: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             sortOrder: number;
+            productId: string;
             key: string;
             value: string;
         }[];
-        targetGroups: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        materials: {
-            id: string;
-            name: string;
-            slug: string;
-        }[];
-        images: {
-            url: string;
-            productId: string;
-            id: string;
-            createdAt: Date;
-            sortOrder: number;
-            isMain: boolean;
-            s3Key: string;
-            alt: string | null;
-        }[];
     } & {
         id: string;
-        isActive: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        slug: string;
-        description: string | null;
         categoryId: string;
         title: string;
+        slug: string;
+        description: string | null;
         discountPercent: number | null;
         badges: import(".prisma/client").$Enums.ProductBadge[];
+        isActive: boolean;
         seoTitle: string | null;
         seoDescription: string | null;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

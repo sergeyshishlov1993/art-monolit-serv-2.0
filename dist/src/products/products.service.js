@@ -229,6 +229,20 @@ let ProductsService = class ProductsService {
         }
         return this.prisma.product.delete({ where: { id } });
     }
+    async setMainImage(productId, imageId) {
+        await this.findById(productId);
+        await this.prisma.$transaction([
+            this.prisma.productImage.updateMany({
+                where: { productId, isMain: true },
+                data: { isMain: false },
+            }),
+            this.prisma.productImage.update({
+                where: { id: imageId },
+                data: { isMain: true },
+            }),
+        ]);
+        return this.findById(productId);
+    }
     async addSpec(productId, dto) {
         await this.findById(productId);
         const maxSort = await this.prisma.productSpec.aggregate({

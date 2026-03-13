@@ -55,6 +55,9 @@ let ProductsController = class ProductsController {
     removeSpec(specId) {
         return this.productsService.removeSpec(specId);
     }
+    setMainImage(id, imageId) {
+        return this.productsService.setMainImage(id, imageId);
+    }
     update(id, dto) {
         return this.productsService.update(id, dto);
     }
@@ -126,6 +129,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "removeSpec", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Put)(':id/main-image/:imageId'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseUUIDPipe)),
+    __param(1, (0, common_1.Param)('imageId', common_1.ParseUUIDPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "setMainImage", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Put)(':id'),

@@ -71,6 +71,15 @@ export class ProductsController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Put(':id/main-image/:imageId')
+    setMainImage(
+        @Param('id', ParseUUIDPipe) id: string,
+        @Param('imageId', ParseUUIDPipe) imageId: string,
+    ) {
+        return this.productsService.setMainImage(id, imageId);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Put(':id')
     update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateProductDto) {
         return this.productsService.update(id, dto);
