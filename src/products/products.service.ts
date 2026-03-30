@@ -46,6 +46,7 @@ export class ProductsService {
         targetGroupSlug?: string;
         materialSlug?: string;
         badge?: string;
+        search?: string;
         all?: boolean;
         page: number;
         limit: number;
@@ -61,6 +62,9 @@ export class ProductsService {
             }),
             ...(filters.badge && {
                 badges: { has: filters.badge as 'NEW' | 'HIT' | 'SALE' },
+            }),
+            ...(filters.search && {
+                title: { contains: filters.search, mode: 'insensitive' },
             }),
         };
 
