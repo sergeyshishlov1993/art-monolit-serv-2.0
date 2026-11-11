@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+// export {} робить файл модулем: інакше його змінні конфліктують з prisma/seed.ts під час `nest build`
+export {};
 // Демо-дані: запуск `npx ts-node prisma/seed-demo.ts`. Картинки — заглушки з public/demo фронта.
 const { PrismaClient } = require('@prisma/client');
 const { PrismaPg } = require('@prisma/adapter-pg');
