@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TelegramService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let TelegramService = TelegramService_1 = class TelegramService {
     constructor(configService) {
         this.configService = configService;
@@ -27,19 +28,33 @@ let TelegramService = TelegramService_1 = class TelegramService {
             const categorySlug = lead.product.category?.slug || '';
             const productSlug = lead.product.slug;
             const url = `${this.siteUrl}/catalog/${categorySlug}/${productSlug}`;
-            productLink = `<a href="${url}">${lead.product.title}</a>`;
+            productLink = `<a href="${url}">${escapeHtml(lead.product.title)}</a>`;
         }
-        const pixel = lead.pixel && lead.pixel !== 'undefined' ? lead.pixel : '—';
+        const utm = [lead.utmSource, lead.utmMedium, lead.utmCampaign]
+            .filter((part) => Boolean(part))
+            .map(escapeHtml)
+            .join(' / ');
+        const pixel = lead.pixel && lead.pixel !== 'undefined' ? escapeHtml(lead.pixel) : '—';
         const text = `
 📦 <b>Нове замовлення!</b>
 
-👤 <b>Ім'я:</b> ${lead.name || 'Не вказано'}
-📱 <b>Телефон:</b> ${lead.phone || 'Не вказано'}
-💬 <b>Повідомлення:</b> ${lead.message || '—'}
+👤 <b>Ім'я:</b> ${escapeHtml(lead.name || 'Не вказано')}
+📱 <b>Телефон:</b> ${escapeHtml(lead.phone || 'Не вказано')}
+💬 <b>Повідомлення:</b> ${lead.message ? escapeHtml(lead.message) : '—'}
 🔗 <b>Товар:</b> ${productLink}
-📍 <b>Джерело:</b> ${lead.source || '—'}
-Pixel: ${pixel}
+📍 <b>Джерело:</b> ${lead.source ? escapeHtml(lead.source) : '—'}
+Pixel: ${pixel}${utm ? `\n🎯 <b>Реклама:</b> ${utm}` : ''}
     `.trim();
+        await this.send(text);
+    }
+    async sendOverdueLeadsReminder(leads) {
+        const lines = leads.map((lead) => {
+            const minutes = Math.round((Date.now() - lead.createdAt.getTime()) / 60000);
+            return `№${lead.number} · ${escapeHtml(lead.name)} · ${escapeHtml(lead.phone)} · ${minutes} хв тому`;
+        });
+        return this.send(`⏰ <b>Необроблені заявки (понад 30 хв)</b>\n\n${lines.join('\n')}`);
+    }
+    async send(text) {
         try {
             const response = await fetch(`https://api.telegram.org/bot${this.botToken}/sendMessage`, {
                 method: 'POST',
@@ -54,10 +69,13 @@ Pixel: ${pixel}
             if (!response.ok) {
                 const error = await response.text();
                 this.logger.error(`Telegram API error: ${error}`);
+                return false;
             }
+            return true;
         }
         catch (error) {
             this.logger.error('Failed to send Telegram notification', error);
+            return false;
         }
     }
 };

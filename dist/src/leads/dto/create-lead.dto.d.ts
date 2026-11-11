@@ -5,4 +5,8 @@ export declare class CreateLeadDto {
     productId?: string;
     source?: string;
     pixel?: string;
+    utmSource?: string;
+    utmMedium?: string;
+    utmCampaign?: string;
+    website?: string;
 }

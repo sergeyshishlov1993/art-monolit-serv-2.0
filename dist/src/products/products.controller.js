@@ -32,12 +32,14 @@ let ProductsController = class ProductsController {
             badge,
         });
     }
-    findAll(categoryId, targetGroupSlug, materialSlug, badge, all, page, limit) {
+    findAll(categoryId, targetGroupSlug, materialSlug, badge, search, sort, all, page, limit) {
         return this.productsService.findAll({
             categoryId,
             targetGroupSlug,
             materialSlug,
             badge,
+            search,
+            sort,
             all: all === 'true',
             page: page ? parseInt(page, 10) : 1,
             limit: limit ? parseInt(limit, 10) : 12,
@@ -88,11 +90,13 @@ __decorate([
     __param(1, (0, common_1.Query)('targetGroup')),
     __param(2, (0, common_1.Query)('material')),
     __param(3, (0, common_1.Query)('badge')),
-    __param(4, (0, common_1.Query)('all')),
-    __param(5, (0, common_1.Query)('page')),
-    __param(6, (0, common_1.Query)('limit')),
+    __param(4, (0, common_1.Query)('search')),
+    __param(5, (0, common_1.Query)('sort')),
+    __param(6, (0, common_1.Query)('all')),
+    __param(7, (0, common_1.Query)('page')),
+    __param(8, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, String, String, String, String]),
+    __metadata("design:paramtypes", [String, String, String, String, String, String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findAll", null);
 __decorate([

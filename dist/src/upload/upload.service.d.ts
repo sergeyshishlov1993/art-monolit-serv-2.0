@@ -36,23 +36,26 @@ export declare class UploadService implements OnModuleInit {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }>;
     uploadProductImage(productId: string, file: Express.Multer.File, isMain?: boolean, alt?: string): Promise<{
-        url: string;
-        productId: string;
         id: string;
         createdAt: Date;
         sortOrder: number;
         isMain: boolean;
+        productId: string;
         s3Key: string;
+        url: string;
         alt: string | null;
     }>;
     uploadPortfolioImage(portfolioWorkId: string, file: Express.Multer.File, alt?: string): Promise<{
-        url: string;
         id: string;
         createdAt: Date;
         sortOrder: number;
         s3Key: string;
+        url: string;
         alt: string | null;
         portfolioWorkId: string;
     }>;
@@ -64,21 +67,21 @@ export declare class UploadService implements OnModuleInit {
         }[];
     }>;
     deleteProductImage(imageId: string): Promise<{
-        url: string;
-        productId: string;
         id: string;
         createdAt: Date;
         sortOrder: number;
         isMain: boolean;
+        productId: string;
         s3Key: string;
+        url: string;
         alt: string | null;
     }>;
     deletePortfolioImage(imageId: string): Promise<{
-        url: string;
         id: string;
         createdAt: Date;
         sortOrder: number;
         s3Key: string;
+        url: string;
         alt: string | null;
         portfolioWorkId: string;
     }>;

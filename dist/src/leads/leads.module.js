@@ -11,14 +11,16 @@ const common_1 = require("@nestjs/common");
 const leads_service_1 = require("./leads.service");
 const leads_controller_1 = require("./leads.controller");
 const auth_module_1 = require("../auth/auth.module");
+const site_settings_module_1 = require("../site-settings/site-settings.module");
+const lead_reminder_service_1 = require("./lead-reminder.service");
 let LeadsModule = class LeadsModule {
 };
 exports.LeadsModule = LeadsModule;
 exports.LeadsModule = LeadsModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule],
+        imports: [auth_module_1.AuthModule, site_settings_module_1.SiteSettingsModule],
         controllers: [leads_controller_1.LeadsController],
-        providers: [leads_service_1.LeadsService],
+        providers: [leads_service_1.LeadsService, lead_reminder_service_1.LeadReminderService],
     })
 ], LeadsModule);
 //# sourceMappingURL=leads.module.js.map

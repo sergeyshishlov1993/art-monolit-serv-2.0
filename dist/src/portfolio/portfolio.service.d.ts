@@ -39,11 +39,11 @@ export declare class PortfolioService {
                 slug: string;
             }[];
             images: {
-                url: string;
                 id: string;
                 createdAt: Date;
                 sortOrder: number;
                 s3Key: string;
+                url: string;
                 alt: string | null;
                 portfolioWorkId: string;
             }[];
@@ -95,11 +95,11 @@ export declare class PortfolioService {
             slug: string;
         }[];
         images: {
-            url: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             s3Key: string;
+            url: string;
             alt: string | null;
             portfolioWorkId: string;
         }[];
@@ -152,11 +152,11 @@ export declare class PortfolioService {
             slug: string;
         }[];
         images: {
-            url: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             s3Key: string;
+            url: string;
             alt: string | null;
             portfolioWorkId: string;
         }[];

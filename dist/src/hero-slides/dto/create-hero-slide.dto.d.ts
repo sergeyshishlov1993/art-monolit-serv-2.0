@@ -4,6 +4,9 @@ export declare class CreateHeroSlideDto {
     buttonText?: string;
     buttonLink?: string;
     imageUrl?: string;
+    focusDesktop?: string;
+    focusTablet?: string;
+    focusMobile?: string;
     sortOrder?: number;
     isActive?: boolean;
 }

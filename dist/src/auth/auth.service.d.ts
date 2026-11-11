@@ -21,8 +21,8 @@ export declare class AuthService {
         refreshToken: string;
     }>;
     getProfile(userId: string): Promise<{
-        email: string;
         id: string;
+        email: string;
         role: import(".prisma/client").$Enums.AdminRole;
         lastLoginAt: Date | null;
         createdAt: Date;

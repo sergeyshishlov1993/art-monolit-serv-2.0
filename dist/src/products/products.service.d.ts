@@ -18,6 +18,8 @@ export declare class ProductsService {
         targetGroupSlug?: string;
         materialSlug?: string;
         badge?: string;
+        search?: string;
+        sort?: string;
         all?: boolean;
         page: number;
         limit: number;
@@ -31,15 +33,6 @@ export declare class ProductsService {
             _count: {
                 images: number;
             };
-            specs: {
-                productId: string;
-                id: string;
-                createdAt: Date;
-                updatedAt: Date;
-                sortOrder: number;
-                key: string;
-                value: string;
-            }[];
             targetGroups: {
                 id: string;
                 name: string;
@@ -51,14 +44,23 @@ export declare class ProductsService {
                 slug: string;
             }[];
             images: {
-                url: string;
-                productId: string;
                 id: string;
                 createdAt: Date;
                 sortOrder: number;
                 isMain: boolean;
+                productId: string;
                 s3Key: string;
+                url: string;
                 alt: string | null;
+            }[];
+            specs: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                sortOrder: number;
+                productId: string;
+                key: string;
+                value: string;
             }[];
         } & {
             id: string;
@@ -110,15 +112,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            productId: string;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -130,14 +123,23 @@ export declare class ProductsService {
             slug: string;
         }[];
         images: {
-            url: string;
-            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
+            productId: string;
             s3Key: string;
+            url: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -189,15 +191,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            productId: string;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -209,14 +202,23 @@ export declare class ProductsService {
             slug: string;
         }[];
         images: {
-            url: string;
-            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
+            productId: string;
             s3Key: string;
+            url: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -252,15 +254,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            productId: string;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -272,14 +265,23 @@ export declare class ProductsService {
             slug: string;
         }[];
         images: {
-            url: string;
-            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
+            productId: string;
             s3Key: string;
+            url: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;
@@ -296,29 +298,29 @@ export declare class ProductsService {
         seoDescription: string | null;
     }>;
     addSpec(productId: string, dto: CreateSpecDto): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
     updateSpec(specId: string, dto: UpdateSpecDto): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
     removeSpec(specId: string): Promise<{
-        productId: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         sortOrder: number;
+        productId: string;
         key: string;
         value: string;
     }>;
@@ -328,15 +330,6 @@ export declare class ProductsService {
             name: string;
             slug: string;
         };
-        specs: {
-            productId: string;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            sortOrder: number;
-            key: string;
-            value: string;
-        }[];
         targetGroups: {
             id: string;
             name: string;
@@ -348,14 +341,23 @@ export declare class ProductsService {
             slug: string;
         }[];
         images: {
-            url: string;
-            productId: string;
             id: string;
             createdAt: Date;
             sortOrder: number;
             isMain: boolean;
+            productId: string;
             s3Key: string;
+            url: string;
             alt: string | null;
+        }[];
+        specs: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            sortOrder: number;
+            productId: string;
+            key: string;
+            value: string;
         }[];
     } & {
         id: string;

@@ -51,6 +51,9 @@ let ProductsService = class ProductsService {
             ...(filters.badge && {
                 badges: { has: filters.badge },
             }),
+            ...(filters.search && {
+                title: { contains: filters.search, mode: 'insensitive' },
+            }),
         };
         const skip = (filters.page - 1) * filters.limit;
         const [items, total] = await Promise.all([
@@ -62,7 +65,9 @@ let ProductsService = class ProductsService {
                     specs: { orderBy: { sortOrder: 'asc' } },
                     _count: { select: { images: true } },
                 },
-                orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+                orderBy: filters.sort === 'title'
+                    ? [{ title: 'asc' }, { id: 'asc' }]
+                    : [{ createdAt: 'desc' }, { id: 'asc' }],
                 skip,
                 take: filters.limit,
             }),

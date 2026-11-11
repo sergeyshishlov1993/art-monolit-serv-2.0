@@ -22,13 +22,13 @@ export declare class CategoriesController {
     findBySlug(slug: string): Promise<{
         products: ({
             images: {
-                url: string;
-                productId: string;
                 id: string;
                 createdAt: Date;
                 sortOrder: number;
                 isMain: boolean;
+                productId: string;
                 s3Key: string;
+                url: string;
                 alt: string | null;
             }[];
         } & {

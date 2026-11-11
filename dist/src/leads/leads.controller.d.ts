@@ -4,7 +4,7 @@ import { UpdateLeadDto } from './dto/update-lead.dto';
 export declare class LeadsController {
     private leadsService;
     constructor(leadsService: LeadsService);
-    create(dto: CreateLeadDto): Promise<{
+    create(dto: CreateLeadDto): Promise<({
         product: {
             category: {
                 slug: string;
@@ -15,41 +15,51 @@ export declare class LeadsController {
         } | null;
     } & {
         number: number;
-        adminComment: string | null;
-        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
+        productId: string | null;
         phone: string;
         message: string | null;
+        status: import(".prisma/client").$Enums.LeadStatus;
         source: string;
         pixel: string | null;
-        status: import(".prisma/client").$Enums.LeadStatus;
+        adminComment: string | null;
+        reminderSentAt: Date | null;
+        utmSource: string | null;
+        utmMedium: string | null;
+        utmCampaign: string | null;
+    }) | {
+        ok: boolean;
     }>;
-    findAll(status?: string, source?: string): import(".prisma/client").Prisma.PrismaPromise<({
-        product: {
-            category: {
-                slug: string;
-            };
-            id: string;
-            slug: string;
-            title: string;
-        } | null;
-    } & {
-        number: number;
-        adminComment: string | null;
-        productId: string | null;
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        name: string;
-        phone: string;
-        message: string | null;
-        source: string;
-        pixel: string | null;
-        status: import(".prisma/client").$Enums.LeadStatus;
-    })[]>;
+    findAll(status?: string, source?: string, search?: string, page?: string, limit?: string): Promise<{
+        items: Awaited<ReturnType<LeadsService["findById"]>>[];
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+    }>;
+    stats(): Promise<{
+        total: number;
+        byDay: {
+            date: string;
+            count: number;
+        }[];
+        bySource: {
+            source: string;
+            count: number;
+        }[];
+        byUtm: {
+            source: string;
+            campaign: string | null;
+            count: number;
+        }[];
+        byStatus: {
+            status: import(".prisma/client").$Enums.LeadStatus;
+            count: number;
+        }[];
+    }>;
     findById(id: string): Promise<{
         product: {
             category: {
@@ -61,17 +71,21 @@ export declare class LeadsController {
         } | null;
     } & {
         number: number;
-        adminComment: string | null;
-        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
+        productId: string | null;
         phone: string;
         message: string | null;
+        status: import(".prisma/client").$Enums.LeadStatus;
         source: string;
         pixel: string | null;
-        status: import(".prisma/client").$Enums.LeadStatus;
+        adminComment: string | null;
+        reminderSentAt: Date | null;
+        utmSource: string | null;
+        utmMedium: string | null;
+        utmCampaign: string | null;
     }>;
     update(id: string, dto: UpdateLeadDto): Promise<{
         product: {
@@ -84,30 +98,38 @@ export declare class LeadsController {
         } | null;
     } & {
         number: number;
-        adminComment: string | null;
-        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
+        productId: string | null;
         phone: string;
         message: string | null;
+        status: import(".prisma/client").$Enums.LeadStatus;
         source: string;
         pixel: string | null;
-        status: import(".prisma/client").$Enums.LeadStatus;
+        adminComment: string | null;
+        reminderSentAt: Date | null;
+        utmSource: string | null;
+        utmMedium: string | null;
+        utmCampaign: string | null;
     }>;
     remove(id: string): Promise<{
         number: number;
-        adminComment: string | null;
-        productId: string | null;
         id: string;
         createdAt: Date;
         updatedAt: Date;
         name: string;
+        productId: string | null;
         phone: string;
         message: string | null;
+        status: import(".prisma/client").$Enums.LeadStatus;
         source: string;
         pixel: string | null;
-        status: import(".prisma/client").$Enums.LeadStatus;
+        adminComment: string | null;
+        reminderSentAt: Date | null;
+        utmSource: string | null;
+        utmMedium: string | null;
+        utmCampaign: string | null;
     }>;
 }

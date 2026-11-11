@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const throttler_1 = require("@nestjs/throttler");
 const prisma_module_1 = require("./prisma/prisma.module");
 const auth_module_1 = require("./auth/auth.module");
 const categories_module_1 = require("./categories/categories.module");
@@ -20,6 +21,7 @@ const target_groups_module_1 = require("./target-groups/target-groups.module");
 const materials_module_1 = require("./materials/materials.module");
 const hero_slides_module_1 = require("./hero-slides/hero-slides.module");
 const telegram_module_1 = require("./telegram/telegram.module");
+const site_settings_module_1 = require("./site-settings/site-settings.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,6 +29,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ isGlobal: true }),
+            throttler_1.ThrottlerModule.forRoot([{ ttl: 60_000, limit: 100 }]),
             prisma_module_1.PrismaModule,
             auth_module_1.AuthModule,
             categories_module_1.CategoriesModule,
@@ -38,6 +41,7 @@ exports.AppModule = AppModule = __decorate([
             materials_module_1.MaterialsModule,
             hero_slides_module_1.HeroSlidesModule,
             telegram_module_1.TelegramModule,
+            site_settings_module_1.SiteSettingsModule,
         ],
     })
 ], AppModule);

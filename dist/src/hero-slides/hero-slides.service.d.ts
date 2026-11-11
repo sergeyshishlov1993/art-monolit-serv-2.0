@@ -22,6 +22,9 @@ export declare class HeroSlidesService {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }[]>;
     findById(id: string): Promise<{
         id: string;
@@ -34,6 +37,9 @@ export declare class HeroSlidesService {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }>;
     create(dto: CreateHeroSlideDto): import(".prisma/client").Prisma.Prisma__HeroSlideClient<{
         id: string;
@@ -46,6 +52,9 @@ export declare class HeroSlidesService {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }, never, import("@prisma/client/runtime/client").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
     update(id: string, dto: UpdateHeroSlideDto): Promise<{
         id: string;
@@ -58,6 +67,9 @@ export declare class HeroSlidesService {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }>;
     remove(id: string): Promise<{
         id: string;
@@ -70,5 +82,8 @@ export declare class HeroSlidesService {
         subtitle: string | null;
         buttonText: string | null;
         buttonLink: string | null;
+        focusDesktop: string | null;
+        focusTablet: string | null;
+        focusMobile: string | null;
     }>;
 }

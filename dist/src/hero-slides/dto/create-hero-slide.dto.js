@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateHeroSlideDto = void 0;
 const class_validator_1 = require("class-validator");
+const FOCUS_PATTERN = /^(100|\d{1,2})% (100|\d{1,2})%$/;
 class CreateHeroSlideDto {
 }
 exports.CreateHeroSlideDto = CreateHeroSlideDto;
@@ -38,6 +39,21 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateHeroSlideDto.prototype, "imageUrl", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Matches)(FOCUS_PATTERN),
+    __metadata("design:type", String)
+], CreateHeroSlideDto.prototype, "focusDesktop", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Matches)(FOCUS_PATTERN),
+    __metadata("design:type", String)
+], CreateHeroSlideDto.prototype, "focusTablet", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Matches)(FOCUS_PATTERN),
+    __metadata("design:type", String)
+], CreateHeroSlideDto.prototype, "focusMobile", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsInt)(),

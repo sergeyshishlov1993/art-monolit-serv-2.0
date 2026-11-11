@@ -5,6 +5,9 @@ interface LeadNotification {
     message?: string | null;
     source?: string | null;
     pixel?: string | null;
+    utmSource?: string | null;
+    utmMedium?: string | null;
+    utmCampaign?: string | null;
     product?: {
         title: string;
         slug: string;
@@ -21,5 +24,12 @@ export declare class TelegramService {
     private readonly siteUrl;
     constructor(configService: ConfigService);
     sendLeadNotification(lead: LeadNotification): Promise<void>;
+    sendOverdueLeadsReminder(leads: {
+        number: number;
+        name: string;
+        phone: string;
+        createdAt: Date;
+    }[]): Promise<boolean>;
+    private send;
 }
 export {};

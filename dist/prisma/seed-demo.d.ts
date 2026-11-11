@@ -1,0 +1,12 @@
+declare const PrismaClient: any;
+declare const PrismaPg: any;
+declare const adapter: any;
+declare const prisma: any;
+declare const PRODUCTS: readonly [readonly ["Пам'ятник Класика Чорний", "pamyatnik-klasika-chornyj", "pamyatniki", readonly ["granit"], readonly ["odinochnyie"], readonly ["HIT"], null], readonly ["Пам'ятник Арка", "pamyatnik-arka", "pamyatniki", readonly ["granit"], readonly ["odinochnyie"], readonly ["NEW"], null], readonly ["Пам'ятник Серце", "pamyatnik-sertse", "pamyatniki", readonly ["mramor"], readonly ["odinochnyie"], readonly [], 10], readonly ["Пам'ятник Хрест", "pamyatnik-hrest", "pamyatniki", readonly ["granit"], readonly ["odinochnyie"], readonly ["HIT"], null], readonly ["Подвійний пам'ятник Гармонія", "podvijnyj-harmoniya", "dvojnye", readonly ["granit"], readonly ["semejnyie"], readonly ["NEW"], null], readonly ["Подвійний пам'ятник Єдність", "podvijnyj-yednist", "dvojnye", readonly ["mramor"], readonly ["semejnyie"], readonly ["SALE"], 15], readonly ["Військовий пам'ятник Герой", "vijskovyj-heroj", "voenye", readonly ["granit"], readonly ["odinochnyie"], readonly ["HIT"], null], readonly ["Військовий пам'ятник Захисник", "vijskovyj-zahysnyk", "voenye", readonly ["granit"], readonly ["odinochnyie"], readonly [], null], readonly ["Ваза гранітна", "vaza-hranitna", "aksesuary", readonly ["granit"], readonly [], readonly [], null], readonly ["Лампада мармурова", "lampada-mramorna", "aksesuary", readonly ["mramor"], readonly [], readonly ["SALE"], 20], readonly ["Комплекс Родинний", "kompleks-rodynnyj", "kompleksy", readonly ["granit"], readonly ["semejnyie"], readonly ["NEW"], null], readonly ["Комплекс Класичний", "kompleks-klasychnyj", "kompleksy", readonly ["granit", "mramor"], readonly ["semejnyie"], readonly [], 5]];
+declare const EXTRA_CATEGORIES: [string, string][];
+declare const EXTRA_NAMES: string[];
+declare const EXTRA_BADGES: string[][];
+declare const EXTRA_MATERIALS: string[][];
+declare const EXTRA_GROUPS: string[][];
+declare const EXTRA: [string, string, string, string[], string[], string[], number | null][];
+declare const SPECS: string[][];

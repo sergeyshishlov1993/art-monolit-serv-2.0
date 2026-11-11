@@ -22,8 +22,8 @@ export declare class AuthController {
             sub: string;
         };
     }): Promise<{
-        email: string;
         id: string;
+        email: string;
         role: import(".prisma/client").$Enums.AdminRole;
         lastLoginAt: Date | null;
         createdAt: Date;
