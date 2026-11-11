@@ -47,6 +47,7 @@ export class ProductsService {
         materialSlug?: string;
         badge?: string;
         search?: string;
+        sort?: string;
         all?: boolean;
         page: number;
         limit: number;
@@ -79,7 +80,9 @@ export class ProductsService {
                     specs: { orderBy: { sortOrder: 'asc' } },
                     _count: { select: { images: true } },
                 },
-                orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+                orderBy: filters.sort === 'title'
+                    ? [{ title: 'asc' }, { id: 'asc' }]
+                    : [{ createdAt: 'desc' }, { id: 'asc' }],
                 skip,
                 take: filters.limit,
             }),

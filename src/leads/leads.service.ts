@@ -16,6 +16,7 @@ type LeadStatus = 'NEW' | 'IN_PROGRESS' | 'DONE' | 'CANCELED'
 type FindAllFilters = {
     status?: string
     source?: string
+    search?: string
     page?: number
     limit?: number
 }
@@ -43,6 +44,13 @@ export class LeadsService {
         const where = {
             ...(filters.status && { status: filters.status as LeadStatus }),
             ...(filters.source && { source: filters.source }),
+            ...(filters.search && {
+                OR: [
+                    { name: { contains: filters.search, mode: 'insensitive' as const } },
+                    { phone: { contains: filters.search } },
+                    { email: { contains: filters.search, mode: 'insensitive' as const } },
+                ],
+            }),
         }
 
         const [items, total] = await this.prisma.$transaction([
@@ -69,6 +77,41 @@ export class LeadsService {
         }
     }
 
+    async stats() {
+        const days = 14;
+        const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Kyiv' });
+
+        const [bySource, byStatus, byUtm, rows] = await Promise.all([
+            this.prisma.lead.groupBy({ by: ['source'], _count: { _all: true } }),
+            this.prisma.lead.groupBy({ by: ['status'], _count: { _all: true } }),
+            this.prisma.lead.groupBy({ by: ['utmSource', 'utmCampaign'], where: { utmSource: { not: null } }, _count: { _all: true } }),
+            this.prisma.$queryRaw<{ day: string; count: number }[]>`
+                SELECT to_char(("createdAt" AT TIME ZONE 'Europe/Kyiv')::date, 'YYYY-MM-DD') AS day, count(*)::int AS count
+                FROM leads
+                WHERE "createdAt" >= now() - interval '15 days'
+                GROUP BY 1`,
+        ]);
+
+        const counts = new Map(rows.map((row) => [row.day, row.count]));
+        const byDay = Array.from({ length: days }, (_, index) => {
+            const date = formatter.format(new Date(Date.now() - (days - 1 - index) * 24 * 60 * 60 * 1000));
+            return { date, count: counts.get(date) ?? 0 };
+        });
+
+        return {
+            total: byStatus.reduce((sum, item) => sum + item._count._all, 0),
+            byDay,
+            bySource: bySource
+                .map((item) => ({ source: item.source, count: item._count._all }))
+                .sort((first, second) => second.count - first.count),
+            byUtm: byUtm
+                .map((item) => ({ source: item.utmSource ?? '', campaign: item.utmCampaign, count: item._count._all }))
+                .sort((first, second) => second.count - first.count)
+                .slice(0, 8),
+            byStatus: byStatus.map((item) => ({ status: item.status, count: item._count._all })),
+        };
+    }
+
     async findById(id: string) {
         const lead = await this.prisma.lead.findUnique({
             where: { id },
@@ -85,8 +128,15 @@ export class LeadsService {
     }
 
     async create(dto: CreateLeadDto) {
+        const { website, ...data } = dto
+
+        // Honeypot заповнений — це бот: відповідаємо успіхом, але нічого не зберігаємо
+        if (website) {
+            return { ok: true }
+        }
+
         const lead = await this.prisma.lead.create({
-            data: dto,
+            data,
             include: {
                 product: { select: PRODUCT_SELECT },
             },
@@ -98,6 +148,9 @@ export class LeadsService {
             message: lead.message,
             source: lead.source,
             pixel: lead.pixel,
+            utmSource: lead.utmSource,
+            utmMedium: lead.utmMedium,
+            utmCampaign: lead.utmCampaign,
             product: lead.product,
         })
 

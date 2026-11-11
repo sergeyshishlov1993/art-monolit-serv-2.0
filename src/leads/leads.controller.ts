@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 import { LeadsService } from './leads.service';
 import { CreateLeadDto } from './dto/create-lead.dto';
 import { UpdateLeadDto } from './dto/update-lead.dto';
@@ -8,6 +9,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 export class LeadsController {
     constructor(private leadsService: LeadsService) {}
 
+    @UseGuards(ThrottlerGuard)
+    @Throttle({ default: { limit: 5, ttl: 60_000 } })
     @Post()
     create(@Body() dto: CreateLeadDto) {
         return this.leadsService.create(dto);
@@ -15,8 +18,26 @@ export class LeadsController {
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    findAll(@Query('status') status?: string, @Query('source') source?: string) {
-        return this.leadsService.findAll({ status, source });
+    findAll(
+        @Query('status') status?: string,
+        @Query('source') source?: string,
+        @Query('search') search?: string,
+        @Query('page') page?: string,
+        @Query('limit') limit?: string,
+    ) {
+        return this.leadsService.findAll({
+            status,
+            source,
+            search,
+            page: page ? parseInt(page, 10) : undefined,
+            limit: limit ? parseInt(limit, 10) : undefined,
+        });
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('stats')
+    stats() {
+        return this.leadsService.stats();
     }
 
     @UseGuards(JwtAuthGuard)
